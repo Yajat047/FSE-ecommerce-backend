@@ -1,0 +1,76 @@
+<!-- Notification container -->
+<div id="notification" class="notification" style="display: none;">
+    <span id="notification-message"></span>
+</div>
+
+<style>
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        border-radius: 4px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: opacity 0.3s ease-in-out;
+        opacity: 0;
+    }
+
+    .notification.show {
+        opacity: 1;
+    }
+
+    .notification.error {
+        background-color: #f44336;
+    }
+
+    .notification.success {
+        background-color: #4CAF50;
+    }
+
+    .notification.info {
+        background-color: #2196F3;
+    }
+</style>
+
+<script>
+function showNotification(message, type = 'success') {
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notification-message');
+    
+    // Set message
+    notificationMessage.textContent = message;
+    
+    // Set type
+    notification.className = 'notification';
+    notification.classList.add(type);
+    
+    // Show notification
+    notification.style.display = 'block';
+    setTimeout(() => notification.classList.add('show'), 10);
+    
+    // Hide after 5 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 300);
+    }, 5000);
+}
+
+// Check for success message in URL
+window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get('message');
+    const type = urlParams.get('type') || 'success';
+    
+    if (message) {
+        showNotification(decodeURIComponent(message), type);
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+}
+</script> 

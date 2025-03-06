@@ -1,0 +1,36 @@
+
+        <%- include('header'); %>
+        <div class="container">
+        <div class="content">
+            <h1>The TechWare Store</h1>
+            <p style="font-family:'Times New Roman', Times, serif ;font-weight: 600;font-size: 35px;"><%= msg %></p>
+
+            <!-- Manage Users Section -->
+            <div class="btn-group">
+                <!-- <h2>Manage Users</h2> -->
+                <a href="/addUser" class="btn btn-success">Add User</a>
+                <a href="/listUsers" class="btn btn-primary">List Users</a>
+            </div>
+
+            <!-- Manage Orders Section -->
+            <div class="btn-group">
+                <a href="/addOrder" class="btn btn-success">Add Order</a>
+                <a href="/listOrders" class="btn btn-primary">List Orders</a>
+            </div>
+            <br>
+
+            <!-- Manage Items Section -->
+            <div class="btn-group">
+                <a href="/additem" class="btn btn-success">Add Product</a>
+                <a href="/listitem" class="btn btn-primary">List Products</a>
+            </div>
+
+            <!-- Manage Categories Section -->
+            <div class="btn-group">
+                <a href="/addcategory" class="btn btn-success">Add Category</a>
+                <a href="/listcategory" class="btn btn-primary">List Categories</a>
+            </div>
+        </div>
+
+        <%- include('footer'); %>
+   

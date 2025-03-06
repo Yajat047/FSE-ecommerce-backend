@@ -1,0 +1,54 @@
+<%- include("header") %>
+
+<div style="border: 2px solid #28a745; padding: 30px; width: 800px; margin: 30px auto; background-color: #fff; border-radius: 15px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);">
+    <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <a href="/" style="display: inline-flex; align-items: center; color: #666; text-decoration: none; font-size: 16px; transition: all 0.3s ease;">
+            <span style="margin-right: 5px;">←</span> Back to Home
+        </a>
+        <a href="/listcategory" style="display: inline-flex; align-items: center; color: #666; text-decoration: none; font-size: 16px; transition: all 0.3s ease;">
+            View All Categories <span style="margin-left: 5px;">→</span>
+        </a>
+    </div>
+    <h1 style="text-align: center; padding: 15px; color: #333; font-size: 28px; margin-bottom: 30px; border-bottom: 2px solid #eee;">Edit Category</h1>
+    <form action="editCategorySubmit" method="post" style="max-width: 600px; margin: 0 auto;">
+        <div style="display: grid; gap: 20px;">
+            <div style="display: grid; gap: 8px;">
+                <label for="input-catname" style="color: #555; font-weight: 500;">Category Name</label>
+                <input type="text" name="catname" id="input-catname" value="<%=catdata.catname%>" required 
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; transition: all 0.3s ease;"
+                    placeholder="Enter category name"
+                    onFocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 2px rgba(40, 167, 69, 0.25)'"
+                    onBlur="this.style.borderColor='#ddd'; this.style.boxShadow='none'" />
+            </div>
+            <div style="display: grid; gap: 8px;">
+                <label for="input-description" style="color: #555; font-weight: 500;">Category Description</label>
+                <textarea name="cDescription" id="input-description" required 
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 100px; resize: vertical; transition: all 0.3s ease;"
+                    placeholder="Enter category description"
+                    onFocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 2px rgba(40, 167, 69, 0.25)'"
+                    onBlur="this.style.borderColor='#ddd'; this.style.boxShadow='none'"><%=catdata.cDescription%></textarea>
+            </div>
+            <div style="display: grid; gap: 8px;">
+                <label for="input-status" style="color: #555; font-weight: 500;">Category Status</label>
+                <select name="cStatus" id="input-status" required 
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; transition: all 0.3s ease; background-color: white;"
+                    onFocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 2px rgba(40, 167, 69, 0.25)'"
+                    onBlur="this.style.borderColor='#ddd'; this.style.boxShadow='none'">
+                    <option value="Active" <%= catdata.cStatus === 'Active' ? 'selected' : '' %>>Active</option>
+                    <option value="Inactive" <%= catdata.cStatus === 'Inactive' ? 'selected' : '' %>>Inactive</option>
+                </select>
+            </div>
+            <input type="hidden" name="catid" value="<%=catdata._id%>" />
+            <div style="margin-top: 20px; text-align: center;">
+                <button type="submit" 
+                    style="background-color: #28a745; color: white; border: none; padding: 12px 40px; border-radius: 8px; font-size: 16px; cursor: pointer; transition: all 0.3s ease;"
+                    onmouseover="this.style.backgroundColor='#218838'"
+                    onmouseout="this.style.backgroundColor='#28a745'">
+                    Update Category
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<%- include("footer") %>

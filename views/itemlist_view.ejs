@@ -1,0 +1,82 @@
+<%- include('header'); %>
+
+<div style="border: 2px solid #28a745; padding: 30px; width: 1200px; margin: 30px auto; background-color: #fff; border-radius: 15px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);">
+    <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <a href="/" style="display: inline-flex; align-items: center; color: #666; text-decoration: none; font-size: 16px; transition: all 0.3s ease;">
+            <span style="margin-right: 5px;">←</span> Back to Home
+        </a>
+        <a href="/additem" style="display: inline-flex; align-items: center; background-color: #28a745; color: white; text-decoration: none; padding: 8px 15px; border-radius: 5px; font-size: 14px; transition: all 0.3s ease;">
+            <span style="margin-right: 5px;">+</span> Add New Product
+        </a>
+    </div>
+    <h1 style="text-align: center; padding: 15px; color: #333; font-size: 28px; margin-bottom: 30px; border-bottom: 2px solid #eee;">Product List</h1>
+    <div style="overflow-x: auto;">
+        <table align="center" class="table table-striped" style="width: 100%; margin-top: 20px; border-collapse: separate; border-spacing: 0; border-radius: 8px; overflow: hidden;">
+            <thead style="background-color: #28a745; color: white;">
+                <tr>
+                    <th style="padding: 15px; text-align: center;">Image</th>
+                    <th style="padding: 15px; text-align: left;">Product Name</th>
+                    <th style="padding: 15px; text-align: left;">Description</th>
+                    <th style="padding: 15px; text-align: right;">Price</th>
+                    <th style="padding: 15px; text-align: center;">Sold</th>
+                    <th style="padding: 15px; text-align: center;">Quantity</th>
+                    <th style="padding: 15px; text-align: left;">Category</th>
+                    <th style="padding: 15px; text-align: left;">Offer</th>
+                    <th style="padding: 15px; text-align: center;">Rating</th>
+                    <th style="padding: 15px; text-align: center;">Status</th>
+                    <th style="padding: 15px; text-align: center;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (itemData && itemData.length > 0) { %>
+                    <% for (let x of itemData) { %>
+                        <tr style="background-color: #fff; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#f8f9fa'" onmouseout="this.style.backgroundColor='#fff'">
+                            <td style="padding: 15px; text-align: center;">
+                                <% if (x.pImage) { %>
+                                    <img src="<%= x.pImage %>" alt="Product image" style="max-width: 80px; max-height: 80px; border-radius: 8px; object-fit: cover; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" />
+                                <% } else { %>
+                                    <div style="width: 80px; height: 80px; background-color: #f8f9fa; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999;">No image</div>
+                                <% } %>
+                            </td>
+                            <td style="padding: 15px;"><%= x.pName %></td>
+                            <td style="padding: 15px;"><%= x.pDescription %></td>
+                            <td style="padding: 15px; text-align: right;">₹<%= x.pPrice %></td>
+                            <td style="padding: 15px; text-align: center;"><%= x.pSold %></td>
+                            <td style="padding: 15px; text-align: center;"><%= x.pQuantity %></td>
+                            <td style="padding: 15px;"><%= x.pCategory %></td>
+                            <td style="padding: 15px;"><%= x.pOffer %></td>
+                            <td style="padding: 15px; text-align: center;">
+                                <span style="background-color: #ffc107; color: #000; padding: 4px 8px; border-radius: 12px; font-size: 12px;">
+                                    <%= x.pRating %>/5
+                                </span>
+                            </td>
+                            <td style="padding: 15px; text-align: center;">
+                                <span style="background-color: <%= x.pStatus.toLowerCase() === 'active' ? '#28a745' : '#dc3545' %>; color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px;">
+                                    <%= x.pStatus %>
+                                </span>
+                            </td>
+                            <td style="padding: 15px; text-align: center;">
+                                <div style="display: flex; gap: 8px; justify-content: center;">
+                                    <a href="/editItem?itemid=<%= x._id %>" style="color: #28a745; text-decoration: none; padding: 4px 8px; border: 1px solid #28a745; border-radius: 4px; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#28a745'; this.style.color='white'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#28a745'">Edit</a>
+                                    <a href="/deleteItem?itemid=<%= x._id %>" onclick="return confirm('Are you sure you want to delete this product?')" style="color: #dc3545; text-decoration: none; padding: 4px 8px; border: 1px solid #dc3545; border-radius: 4px; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#dc3545'; this.style.color='white'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#dc3545'">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    <% } %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="11" style="text-align: center; padding: 30px; color: #666;">
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                                <span style="font-size: 24px;">📦</span>
+                                <span>No products found</span>
+                                <a href="/additem" style="color: #28a745; text-decoration: none; margin-top: 10px;">Add your first product</a>
+                            </div>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<%- include('footer'); %>

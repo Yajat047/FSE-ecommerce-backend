@@ -1,0 +1,87 @@
+<%- include('header') %>
+
+<div style="border: 2px solid #28a745; padding: 30px; width: 800px; margin: 30px auto; background-color: #fff; border-radius: 15px; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);">
+    <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <a href="/" style="display: inline-flex; align-items: center; color: #666; text-decoration: none; font-size: 16px; transition: all 0.3s ease;">
+            <span style="margin-right: 5px;">←</span> Back to Home
+        </a>
+        <a href="/listorders" style="display: inline-flex; align-items: center; color: #666; text-decoration: none; font-size: 16px; transition: all 0.3s ease;">
+            View All Orders <span style="margin-left: 5px;">→</span>
+        </a>
+    </div>
+    <h1 style="text-align: center; padding: 15px; color: #333; font-size: 28px; margin-bottom: 30px; border-bottom: 2px solid #eee;">Edit Order</h1>
+    <form action="/editOrderSubmit" method="post" style="max-width: 600px; margin: 0 auto;">
+        <div style="display: grid; gap: 20px;">
+            <div style="display: grid; gap: 8px;">
+                <label for="input-allProducts" style="color: #555; font-weight: 500;">All Products</label>
+                <input type="text" name="allProducts" id="input-allProducts" value="<%= orderData.allProducts %>" required 
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; transition: all 0.3s ease;"
+                    placeholder="Enter product names"
+                    onFocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 2px rgba(40, 167, 69, 0.25)'"
+                    onBlur="this.style.borderColor='#ddd'; this.style.boxShadow='none'" />
+            </div>
+            <div style="display: grid; gap: 8px;">
+                <label for="input-user" style="color: #555; font-weight: 500;">User</label>
+                <input type="text" name="user" id="input-user" value="<%= orderData.user %>" required 
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; transition: all 0.3s ease;"
+                    placeholder="Enter user name"
+                    onFocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 2px rgba(40, 167, 69, 0.25)'"
+                    onBlur="this.style.borderColor='#ddd'; this.style.boxShadow='none'" />
+            </div>
+            <div style="display: grid; gap: 8px;">
+                <label for="input-amount" style="color: #555; font-weight: 500;">Amount</label>
+                <input type="number" name="amount" id="input-amount" value="<%= orderData.amount %>" required 
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; transition: all 0.3s ease;"
+                    placeholder="Enter amount"
+                    onFocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 2px rgba(40, 167, 69, 0.25)'"
+                    onBlur="this.style.borderColor='#ddd'; this.style.boxShadow='none'" />
+            </div>
+            <div style="display: grid; gap: 8px;">
+                <label for="input-transactionId" style="color: #555; font-weight: 500;">Transaction ID</label>
+                <input type="text" name="transactionId" id="input-transactionId" value="<%= orderData.transactionId %>" required 
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; transition: all 0.3s ease;"
+                    placeholder="Enter transaction ID"
+                    onFocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 2px rgba(40, 167, 69, 0.25)'"
+                    onBlur="this.style.borderColor='#ddd'; this.style.boxShadow='none'" />
+            </div>
+            <div style="display: grid; gap: 8px;">
+                <label for="input-address" style="color: #555; font-weight: 500;">Address</label>
+                <textarea name="address" id="input-address" required 
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; min-height: 80px; resize: vertical; transition: all 0.3s ease;"
+                    placeholder="Enter delivery address"
+                    onFocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 2px rgba(40, 167, 69, 0.25)'"
+                    onBlur="this.style.borderColor='#ddd'; this.style.boxShadow='none'"><%= orderData.address %></textarea>
+            </div>
+            <div style="display: grid; gap: 8px;">
+                <label for="input-phoneNumber" style="color: #555; font-weight: 500;">Phone Number</label>
+                <input type="tel" name="phoneNumber" id="input-phoneNumber" value="<%= orderData.phoneNumber %>" required 
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; transition: all 0.3s ease;"
+                    placeholder="Enter phone number"
+                    onFocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 2px rgba(40, 167, 69, 0.25)'"
+                    onBlur="this.style.borderColor='#ddd'; this.style.boxShadow='none'" />
+            </div>
+            <div style="display: grid; gap: 8px;">
+                <label for="input-status" style="color: #555; font-weight: 500;">Status</label>
+                <select name="status" id="input-status" required 
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; transition: all 0.3s ease; background-color: white;"
+                    onFocus="this.style.borderColor='#28a745'; this.style.boxShadow='0 0 0 2px rgba(40, 167, 69, 0.25)'"
+                    onBlur="this.style.borderColor='#ddd'; this.style.boxShadow='none'">
+                    <option value="Pending" <%= orderData.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+                    <option value="Completed" <%= orderData.status === 'Completed' ? 'selected' : '' %>>Completed</option>
+                    <option value="Failed" <%= orderData.status === 'Failed' ? 'selected' : '' %>>Failed</option>
+                </select>
+            </div>
+            <input type="hidden" name="orderId" value="<%= orderData._id %>" />
+            <div style="margin-top: 20px; text-align: center;">
+                <button type="submit" 
+                    style="background-color: #28a745; color: white; border: none; padding: 12px 40px; border-radius: 8px; font-size: 16px; cursor: pointer; transition: all 0.3s ease;"
+                    onmouseover="this.style.backgroundColor='#218838'"
+                    onmouseout="this.style.backgroundColor='#28a745'">
+                    Update Order
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<%- include('footer') %>
